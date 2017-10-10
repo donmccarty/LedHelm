@@ -179,7 +179,9 @@
 		if( tmpVoltLines != voltLines ( {
 			// a change of state has been detected
 
-			if( tmpVoltLines == hazardSignal || tmpVoltLines == no Signal ){
+			if(	( tmpVoltLines == hazardSignal ) || 
+					( tmpVoltLines == no Signal ) 
+				){
 				// no need to manipulate state
 				voltLines = tmpVoltLines;
 			}
