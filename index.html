@@ -30,6 +30,16 @@
     document.getElementById('rightTurnImg').src = turnRightOffImg;
     hazardFlag = 0;
   }
+  
+  function turnBoth() {
+  	if( hazardFlag == 1 ) { 
+  		hazardsOff();
+  		document.getElementById('hazardsOff').checked = true;
+  		hazardFlag = 0; 
+  	}
+	document.getElementById('rightTurnImg').src = turnRightOnImg;
+   document.getElementById('leftTurnImg').src = turnLeftOnImg;
+  }
 
 
   function brakeImgOn() {
@@ -47,6 +57,9 @@
       document.getElementById('rightTurnImg').src = turnRightOnImg;
       document.getElementById('leftTurnImg').src = turnLeftOnImg;
       document.getElementById('brakeImg').src = brakeHazard;
+      
+      document.getElementById('brakeOff').checked = true;
+      document.getElementById('brakeOff').checked = true;
   }
 
 function hazardsOff() {
@@ -78,16 +91,16 @@ function hazardsOff() {
 <input 	type = "radio"		name = "turnSignals"
 		id = "turnCancel"	value = "cancel"
         onclick="turnCancel(this.value)" 
-        checked = "checked"	/>
-<label for = "sizeMed">cancel</label>
+        checked = "checked"	/>cancel
 <input	type = "radio"		name = "turnSignals"
 		id = "turnLeft"		value = "left" 
-        onclick="turnLeft(this.value)" />
-<label for = "sizeSmall">left</label>
+        onclick="turnLeft(this.value)" />left
 <input	type = "radio"		name = "turnSignals"
 		id = "turnRight"	value = "right"
-        onclick="turnRight(this.value)" />
-<label for = "sizeMed">right</label>
+        onclick="turnRight(this.value)" />right
+<input	type = "radio"		name = "turnSignals"
+		id = "turnBoth"	value = "right"
+        onclick="turnBoth(this.value)" />Both
 </br>
 
 <img id="leftTurnImg" src="imgs/turnLeftOff.png" alt="" height="50" width="50">
