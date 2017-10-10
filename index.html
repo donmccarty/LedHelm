@@ -51,11 +51,14 @@
   function brakeImgOn() {
   	if( hazardFlag == 0 ) {
       document.getElementById('brakeImg').src = brakeOnImg;
+    } else {
+    	document.getElementById('brakeOff').checked = true;
     }
   }
 
   function brakeImgOff() {
       document.getElementById('brakeImg').src = brakeOffImg;
+      document.getElementById('brakeOff').checked = true;
   }
   
   function hazardsOn() {
