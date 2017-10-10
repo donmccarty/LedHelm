@@ -50,15 +50,19 @@
 
 	function brakeImgOn() {
 		if( hazardFlag == 0 ) {
-		document.getElementById('brakeImg').src = brakeOnImg;
+			document.getElementById('brakeImg').src = brakeOnImg;
 		} else {
-		document.getElementById('brakeOff').checked = true;
-	}
+			document.getElementById('brakeFlash').checked = true;
+		}
 	}
 
 	function brakeImgOff() {
-		document.getElementById('brakeImg').src = brakeOffImg;
-		document.getElementById('brakeOff').checked = true;
+		if( hazardFlag ==0 ) {
+			document.getElementById('brakeImg').src = brakeOffImg;
+			document.getElementById('brakeOff').checked = true;
+		} else {
+			document.getElementById('brakeFlash').checked = true;
+		}
 	}
 
 	function brakeImgFlash() {
@@ -139,4 +143,194 @@
 
 <img id="brakeImg" src="imgs/brakeOff.gif" height="50" width="50">
 </br>
+
+
+<hr>
+<!-- 
+	********************************************************* 
+	********************************************************* 
+	********************************************************* 
+-->
+
+<script type="text/javascript" src="parallel.js">
+
+	/*	voltLines will be treated as a binary number with 3 bits
+		bit 0 = left signal
+		bit 1 = brake signal
+		bit 2 = right signal
+	*/
+	int	voltLines = 0,
+			tmpVoltLines = 0
+			leftsignal =	0b100,
+			brakeSignal =	0b010,
+			rightSignal =	0b001,
+			hazardSignal = 0b111,
+			noSignal = 0b000,
+			hazardState = 0;
+	
+	helmetSetLights(){
+	};
+	
+	baseSetState() {
+	
+		if( tmpVoltLines != voltLines ( {
+			// a change of state has been detected
+
+			if( tmpVoltLines == hazardSignal || tmpVoltLines == no Signal ){
+				// no need to manipulate state
+				voltLines = tmpVoltLines;
+			}
+			else {	
+				if( tmpVoltLines & brakeSignal )
+					voltLines |= brakeSignal		// turn brake signal on
+				else	
+					voltLines &= ~brakeSignal;		// turn brake signal off
+			
+				if( tmpVoltLines & leftSignal ) {
+					voltLines |= leftSignal;		// turn left signal on
+					voltLines &= ~rightSignal		// turn right signal off
+				}	else {
+					voltLines &= ~leftsignal 		// turn left signal off
+				}
+			
+				if( tmpVoltLines & rightSignal ) {
+					voltLines |= rightSignal;
+					voltLines &= ~leftSignal;		// turn left signal off
+				} else {
+					voltLines &= ~rightSignal;	// turn right signal off
+				}
+				
+			}	
+		}	
+	
+	}
+
+	helmetSetLights( int lightState);	
+	
+		document.getElementById('leftTurnImg').src = turnLeftOnImg;
+		document.getElementById('rightTurnImg').src = turnRightOffImg;
+
+		if( lightState == hazardSignal )
+			// set all lights to flashing
+			document
+		else {	// if( lightState == hazardSignal )...
+			if( lightState & brakeSignal )	
+				lightState |= brakeSignal		// turn brake signal on
+			else	
+				lightState &= ~brakeSignal;	// turn brake signal off
+			
+			if( lightState & leftSignal ) {
+				lightState |= leftSignal;		// turn left signal on
+				lightState &= ~rightSignal		// turn right signal off
+			}	else {
+				lightState &= ~leftsignal 		// turn left signal off
+			};
+			
+			if( lightState & rightSignal ) {
+				lightState |= rightSignal;
+				lightState &= ~leftSignal;		// turn left signal off
+			} else {
+				lightState &= ~rightSignal;	// turn right signal off
+			};
+				
+		}	// if( lightState == hazardSignal )...else...
+	
+	};
+	
+	turn( int direction) {
+
+		tmpVoltLines = voltLines;
+		
+		switch( direction ) {
+			case 0:	// turn off both signals
+					tmpVoltLines &= ~leftSignal;
+					tmpVoltLines &= ~rightSignal
+				}
+			case 1:	// turn on left signal {
+				tmpVoltLines |= leftSignal;
+				// turn off right signal
+				tmpVoltLines &= ~rightSignal
+			}
+			case 2:	// turn on right signal
+				tmpVoltLines |= rightSignal;
+				// turn off left signal
+				tmpVoltLines &= ~leftSignal
+			case 3:	// turn on both signals;
+				tmpVoltLines |= ( leftSignal + rightSignal);
+		}
+		
+		baseSetState();
+		
+	};
+	
+	brake( int brakeFlag ) {
+	
+		tmpVoltLines = voltLines;
+	
+		switch( brakeFlag ) {
+			case 0:	// turn brake off
+				tmpVoltLines &= ~brakeSignal;
+			case 1:	// turn brake on
+				tmpVoltLines |= brakeSignal;
+		};
+	
+	} ;
+
+</script>
+
+
+<h1>Console</h1></br>
+
+<b>Hazards</b> </br>
+<input	type = "radio"		name = "hazards"
+		id = "hazardsOff2"	value = "off"	
+        onclick="turnVoltage( 0, 0 )"	
+		checked = "checked" />Off
+<input	type = "radio"		name = "hazards"
+		id = "hazardsOn2"	value = "on" 
+        onclick="turnVoltage( 1, 1 )"	/>On
+<p></p>
+
+
+<b>Turn Signals</b></br>
+<input 	type = "radio"			name = "turnSignals2"
+			id = "turn(0)"	value = "cancel"
+        onclick="" 
+        checked = "checked"	/>cancel
+<input	type = "radio"		name = "turnSignals2"
+		id = "turnLeft2"		value = "left" 
+        onclick="turn(1)" />left
+<input	type = "radio"		name = "turnSignals2"
+		id = "turnRight2"	value = "right"
+        onclick="turn(2)" />right
+<input	type = "radio"		name = "turnSignals2"
+		id = "turnBoth2"	value = "right"
+        onclick="turn(3)" />Both
+</br>
+
+<b>Brake</b></br>
+<input 	type = "radio"	name = "brakes"		
+		id = "brakeOff"	value = "off"	
+        onclick="brake( 0 )"
+        checked = "checked" />Off
+<input	type = "radio"	name = "brakes"
+		id = "brakeOn"	value = "on" 
+		onclick="brake( 1 )" />On
+<p></p>
+
+<table style="width:100%">
+	<tr>
+		<th>
+			<img id="leftTurnImg2" src="imgs/turnLeftOff.png" alt="" height="50" width="50">
+		</th>
+		<th>
+			<img id="brakeImg2" src="imgs/brakeOff.gif" height="50" width="50">
+		</th>
+		<th>
+			<img id="rightTurnImg2" src="imgs/turnRightOff.png" alt="" height="50" width="50">
+		</th>
+	</tr>
+</table>
+
+
 
