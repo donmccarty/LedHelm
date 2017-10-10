@@ -15,6 +15,8 @@
     document.getElementById('leftTurnImg').src = turnLeftOnImg;
     document.getElementById('rightTurnImg').src = turnRightOffImg;
     hazardFlag = 0;
+    
+    document.getElementById('hazardsOff').checked = true;
   }
 
   function turnRight(imgPtr) {
@@ -22,6 +24,8 @@
     document.getElementById('leftTurnImg').src = turnLeftOffImg;
     document.getElementById('rightTurnImg').src = turnRightOnImg;
     hazardFlag = 0;
+
+    document.getElementById('hazardsOff').checked = true;
   }
 
   function turnCancel() {
@@ -29,6 +33,8 @@
     document.getElementById('leftTurnImg').src = turnLeftOffImg;
     document.getElementById('rightTurnImg').src = turnRightOffImg;
     hazardFlag = 0;
+    
+    document.getElementById('hazardsOff').checked = true;    
   }
   
   function turnBoth() {
@@ -59,7 +65,7 @@
       document.getElementById('brakeImg').src = brakeHazard;
       
       document.getElementById('brakeOff').checked = true;
-      document.getElementById('brakeOff').checked = true;
+      document.getElementById('turnBoth').checked = true;
   }
 
 function hazardsOff() {
@@ -67,6 +73,9 @@ function hazardsOff() {
       document.getElementById('rightTurnImg').src = turnRightOffImg;
       document.getElementById('leftTurnImg').src = turnLeftOffImg;
       document.getElementById('brakeImg').src = brakeOffImg;
+      
+      document.getElementById('brakeOff').checked = true;
+      document.getElementById('turnCancel').checked = true;
   }
 
 </script>
