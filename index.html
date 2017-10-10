@@ -1,85 +1,88 @@
 <script type="text/javascript">
-  turnRightOffImg = "imgs/turnRightOff.png";
-  turnRightOnImg = "imgs/turnRightOn.gif";
-  turnLeftOffImg = "imgs/turnLeftOff.png";
-  turnLeftOnImg = "imgs/turnLeftOn.gif";
+	turnRightOffImg = "imgs/turnRightOff.png";
+	turnRightOnImg = "imgs/turnRightOn.gif";
+	turnLeftOffImg = "imgs/turnLeftOff.png";
+	turnLeftOnImg = "imgs/turnLeftOn.gif";
 
-  brakeOffImg = "imgs/brakeOff.gif";
-  brakeOnImg = "imgs/brakeOn.jpg";
-  brakeHazard = "imgs/brakeHazard.gif";
-  
-  var hazardFlag = 0;
+	brakeOffImg = "imgs/brakeOff.gif";
+	brakeOnImg = "imgs/brakeOn.jpg";
+	brakeHazard = "imgs/brakeHazard.gif";
 
-  function turnLeft(imgPtr) {
-  	if( hazardFlag == 1 ) { brakeImgOff() };
-    document.getElementById('leftTurnImg').src = turnLeftOnImg;
-    document.getElementById('rightTurnImg').src = turnRightOffImg;
-    hazardFlag = 0;
-    
-    document.getElementById('hazardsOff').checked = true;
-  }
+	var hazardFlag = 0;
 
-  function turnRight(imgPtr) {
-  	if( hazardFlag == 1 ) { brakeImgOff() };
-    document.getElementById('leftTurnImg').src = turnLeftOffImg;
-    document.getElementById('rightTurnImg').src = turnRightOnImg;
-    hazardFlag = 0;
+	function turnLeft(imgPtr) {
+		if( hazardFlag == 1 ) { brakeImgOff() };
+		document.getElementById('leftTurnImg').src = turnLeftOnImg;
+		document.getElementById('rightTurnImg').src = turnRightOffImg;
+		hazardFlag = 0;
 
-    document.getElementById('hazardsOff').checked = true;
-  }
+		document.getElementById('hazardsOff').checked = true;
+	}
 
-  function turnCancel() {
-  	if( hazardFlag == 1 ) { brakeImgOff() };
-    document.getElementById('leftTurnImg').src = turnLeftOffImg;
-    document.getElementById('rightTurnImg').src = turnRightOffImg;
-    hazardFlag = 0;
-    
-    document.getElementById('hazardsOff').checked = true;    
-  }
-  
-  function turnBoth() {
-  	if( hazardFlag == 1 ) { 
-  		hazardsOff();
-  		document.getElementById('hazardsOff').checked = true;
-  		hazardFlag = 0; 
-  	}
-	document.getElementById('rightTurnImg').src = turnRightOnImg;
-   document.getElementById('leftTurnImg').src = turnLeftOnImg;
-  }
+	function turnRight(imgPtr) {
+		if( hazardFlag == 1 ) { brakeImgOff() };
+		document.getElementById('leftTurnImg').src = turnLeftOffImg;
+		document.getElementById('rightTurnImg').src = turnRightOnImg;
+		hazardFlag = 0;
+
+		document.getElementById('hazardsOff').checked = true;
+	}
+
+	function turnCancel() {
+		if( hazardFlag == 1 ) { brakeImgOff() };
+		document.getElementById('leftTurnImg').src = turnLeftOffImg;
+		document.getElementById('rightTurnImg').src = turnRightOffImg;
+		hazardFlag = 0;
+
+		document.getElementById('hazardsOff').checked = true;    
+	}
+
+	function turnBoth() {
+		if( hazardFlag == 1 ) { 
+		hazardsOff();
+		document.getElementById('hazardsOff').checked = true;
+		hazardFlag = 0; 
+		}
+		document.getElementById('rightTurnImg').src = turnRightOnImg;
+		document.getElementById('leftTurnImg').src = turnLeftOnImg;
+	}
 
 
-  function brakeImgOn() {
-  	if( hazardFlag == 0 ) {
-      document.getElementById('brakeImg').src = brakeOnImg;
-    } else {
-    	document.getElementById('brakeOff').checked = true;
-    }
-  }
+	function brakeImgOn() {
+		if( hazardFlag == 0 ) {
+		document.getElementById('brakeImg').src = brakeOnImg;
+		} else {
+		document.getElementById('brakeOff').checked = true;
+	}
+	}
 
-  function brakeImgOff() {
-      document.getElementById('brakeImg').src = brakeOffImg;
-      document.getElementById('brakeOff').checked = true;
-  }
-  
-  function hazardsOn() {
-  	hazardFlag = 1;
-      document.getElementById('rightTurnImg').src = turnRightOnImg;
-      document.getElementById('leftTurnImg').src = turnLeftOnImg;
-      document.getElementById('brakeImg').src = brakeHazard;
-      
-      document.getElementById('brakeOff').checked = true;
-      document.getElementById('turnBoth').checked = true;
-  }
+	function brakeImgOff() {
+		document.getElementById('brakeImg').src = brakeOffImg;
+		document.getElementById('brakeOff').checked = true;
+	}
 
-function hazardsOff() {
-	hazardFlag = 0;
-      document.getElementById('rightTurnImg').src = turnRightOffImg;
-      document.getElementById('leftTurnImg').src = turnLeftOffImg;
-      document.getElementById('brakeImg').src = brakeOffImg;
-      
-      document.getElementById('brakeOff').checked = true;
-      document.getElementById('turnCancel').checked = true;
-  }
+	function brakeImgFlash() {
+		document.getElementById('brakeImg').src = brakeHazard;
+	}
+
+	function hazardsOn() {
+		hazardFlag = 1;
+		document.getElementById('rightTurnImg').src = turnRightOnImg;
+		document.getElementById('leftTurnImg').src = turnLeftOnImg;
+		brakeImgFlash();
+		document.getElementById('brakeFlash').checked = true;
+		document.getElementById('turnBoth').checked = true;
+	}
+
+	function hazardsOff() {
+		hazardFlag = 0;
+		document.getElementById('rightTurnImg').src = turnRightOffImg;
+		document.getElementById('leftTurnImg').src = turnLeftOffImg;
+		document.getElementById('brakeImg').src = brakeOffImg;
+
+		document.getElementById('brakeOff').checked = true;
+		document.getElementById('turnCancel').checked = true;
+	}
 
 </script>
 
@@ -125,12 +128,13 @@ function hazardsOff() {
 <input 	type = "radio"	name = "brakes"		
 		id = "brakeOff"	value = "off"	
         onclick="brakeImgOff(this.value)"
-        checked = "checked" />
-<label for = "brakeImgOff">Off</label>
+        checked = "checked" />Off
 <input	type = "radio"	name = "brakes"
 		id = "brakeOn"	value = "on" 
-		onclick="brakeImgOn(this.value)" />
-<label for = "brakeOn">On</label>
+		onclick="brakeImgOn(this.value)" />On
+<input	type = "radio"	name = "brakes"
+		id = "brakeFlash"	value = "on" 
+		onclick="brakeImgFlash(this.value)" />Flash
 <p></p>
 
 <img id="brakeImg" src="imgs/brakeOff.gif" height="50" width="50">
