@@ -174,7 +174,7 @@
 			noSignal = 0b000,
 			hazardState = 0;
 	
-	baseSetState() {
+	function baseSetState() {
 	
 		if( tmpVoltLines != voltLines ( {
 			// a change of state has been detected
@@ -208,7 +208,7 @@
 	
 	}
 
-	helmetSetLights( int lightState);	
+	function helmetSetLights( int lightState);	
 	
 		document.getElementById('leftTurnImg').src = turnLeftOnImg;
 		document.getElementById('rightTurnImg').src = turnRightOffImg;
@@ -240,7 +240,7 @@
 	
 	};
 	
-	turn( int direction) {
+	function turn( int direction) {
 
 		tmpVoltLines = voltLines;
 		
@@ -266,7 +266,7 @@
 		
 	};
 	
-	brake( int brakeFlag ) {
+	function brake( int brakeFlag ) {
 	
 		tmpVoltLines = voltLines;
 	
